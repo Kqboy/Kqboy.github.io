@@ -101,15 +101,9 @@
     }
 
     .team-img {
-      width: 60%;
+      width: 100%;
       border-radius: 10px;
       margin-top: 10px;
-      opacity: 0.85;
-      transition: 0.3s;
-    }
-
-    .team-img:hover {
-      opacity: 1;
     }
     
     .patent-links a {
@@ -176,9 +170,18 @@
     <div class="card">
       <b>RoboCup Optimization</b>
       <p>CMA-ES 机器人优化</p>
-      <img class="team-img" src="team.jpg" alt="team photo">
-      <a class="project-link" href="https://github.com/Kqboy/RoboCup3D" target="_blank">View Project →</a>
-    </div>
+
+      <details>
+        <summary style="cursor:pointer; color:#1a3a5c; margin-top:8px;">
+          👥 View Team Photo
+         </summary>
+         <img class="team-img" src="team.jpg" alt="team photo">
+       </details>
+
+       <a class="project-link" href="https://github.com/Kqboy/robocup-project" target="_blank">
+          View Project →
+       </a>
+     </div>
 
   </section>
 
