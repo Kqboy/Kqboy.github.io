@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>闫坤祺 · Kunqi Yan | 合肥工业大学 · 多模态与计算机视觉</title>
 
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -137,6 +137,7 @@
       font-weight: 500;
       transition: all 0.2s ease;
       border: none;
+      cursor: pointer;
     }
 
     .btn-outline {
@@ -200,15 +201,6 @@
     .card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-    }
-
-    .clickable {
-      cursor: pointer;
-    }
-
-    /* 只有包含 .project-click 的卡片才有点击跳转行为，避免内部细节冲突 */
-    .project-card-click {
-      cursor: pointer;
     }
 
     .project-link {
@@ -288,6 +280,76 @@
       font-weight: normal;
     }
 
+    /* 可点击奖项样式 */
+    .clickable-award {
+      cursor: pointer;
+      transition: all 0.1s ease;
+      border-bottom: 1px dashed var(--accent);
+      display: inline-block;
+      line-height: 1.3;
+    }
+    .clickable-award:hover {
+      color: var(--accent-light);
+      border-bottom-color: var(--accent-light);
+      transform: scale(1.01);
+    }
+
+    /* 模态框样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .modal-content {
+      max-width: 90%;
+      max-height: 85%;
+      background: white;
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: default;
+    }
+    .modal-content img {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .modal-close {
+      align-self: flex-end;
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      margin-bottom: 8px;
+      background: #f0f0f0;
+      width: 36px;
+      text-align: center;
+      border-radius: 30px;
+      transition: 0.1s;
+    }
+    .modal-close:hover {
+      background: #ddd;
+    }
+    .modal-caption {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
     @media (max-width: 768px) {
       .hero {
         grid-template-columns: 1fr;
@@ -324,7 +386,7 @@
 
 <div class="container">
 
-  <!-- 关于部分：中英结合 (已删除“综合绩点前25%”字样) -->
+  <!-- 关于部分 (已删除绩点前25%字样) -->
   <div class="hero" id="about">
     <div>
       <div class="avatar">
@@ -350,7 +412,6 @@
         <span>多模态 / Multimodal</span><span>计算机视觉 / CV</span><span>大模型 / LLM</span><span>OCR</span><span>RoboCup</span><span>Python/PyTorch</span>
       </div>
 
-      <!-- 详细背景 中英双语 -->
       <div class="about-highlight">
         <p style="font-size: 0.9rem; margin-bottom: 6px;">📚 <strong>教育背景 / Education:</strong>  CET-4/6 通过 · 数学基础: 线性代数 90, 高数均分83.5 · 主修信号处理、数字逻辑、信息传输原理。</p>
         <p style="font-size: 0.9rem; margin-bottom: 6px;">🏆 <strong>科研亮点 / Research:</strong> 两项发明专利(跨模态哈希+大模型小样本分类) · RoboCup 仿真3D 全国一等奖(CMA-ES优化) · 省级大创技术负责人。</p>
@@ -359,54 +420,48 @@
     </div>
   </div>
 
-  <!-- 项目板块 (中英双语呈现，RoboCup 卡片不再因点击团队照片而跳转，只通过项目代码链接跳转；大创项目新增GitHub链接) -->
+  <!-- 项目板块 -->
   <section id="projects">
     <h2>📌 代表性项目 / Featured Projects</h2>
 
-    <!-- 项目1：多模态作业系统，可点击卡片跳转github -->
-    <div class="card project-card-click" data-url="https://github.com/Kqboy/OCR-LLM-Project">
+    <div class="card" data-url="https://github.com/Kqboy/OCR-LLM-Project">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
         <b style="font-size: 1.1rem;">📱 多模态作业辅导与错题分析系统 <span class="lang-badge">Multimodal Homework System</span></b>
         <span style="font-size: 0.7rem; background:#eef2f7; padding:2px 8px; border-radius:20px;">毕设 · 进行中</span>
       </div>
       <p style="margin: 8px 0;"><strong>简介：</strong> 基于微信小程序 + OCR识别(Tesseract LSTM) + 大模型智能批改，实现拍照上传、错题分析、个性化辅导。后端调用LLM生成学习建议。</p>
-      <p style="font-size: 0.85rem; color:#3b6e4c;"><strong>技术栈：</strong> Python, Tesseract OCR, LLM API (GPT/DeepSeek), Flask, 微信小程序开发</p>
+      <p style="font-size: 0.85rem; color:#3b6e4c;"><strong>技术栈：</strong> Python, Tesseract OCR, LLM API, Flask, 微信小程序开发</p>
       <p style="font-size: 0.85rem;"><em>Built an end-to-end homework correction pipeline with OCR and LLM reasoning, boosting feedback efficiency.</em></p>
       <a class="project-link" href="https://github.com/Kqboy/OCR-LLM-Project" target="_blank">🔗 GitHub 仓库 →</a>
     </div>
 
-    <!-- 项目2：RoboCup 卡片——点击团队照片不再跳转，仅项目代码链接跳转 -->
     <div class="card">
       <b>⚽ RoboCup 3D 仿真机器人优化 · CMA-ES  <span class="lang-badge">Robot Motion Optimization</span></b>
       <p style="margin: 8px 0;"><strong>项目描述：</strong> 中国机器人大赛仿真3D组，使用CMA-ES进化策略优化仿人机器人踢球关节参数，通过“采样-仿真-损失反馈”迭代找到最优关节组，实现不同距离精准踢球，助力团队获得<strong>国家级一等奖</strong>。</p>
       <p style="font-size: 0.85rem; color:#3b6e4c;">Tech: Python, NumPy, CMA-ES, RoboCup 3D Simulator</p>
       <p style="font-size: 0.85rem;"><em>Optimized 22-DoF humanoid kicking motions using evolution strategies, improving long-shot accuracy by 27%.</em></p>
       
-      <!-- 团队照片独立展示，无任何跳转行为 -->
       <details>
         <summary>📸 查看团队获奖照片 / View Team Photo</summary>
         <img class="team-img" src="team.jpg" alt="RoboCup team photo" onerror="this.src='https://placehold.co/400x200?text=RoboCup+National+First+Prize'">
       </details>
       
-      <!-- 只有这里点击才会跳转项目代码，符合需求 -->
       <a class="project-link" href="https://github.com/Kqboy/RoboCup3D" target="_blank">🔗 项目代码 / Code →</a>
     </div>
 
-    <!-- 项目3：省级大创项目，新增项目代码链接 (对比上面部分增加GitHub跳转) -->
     <div class="card">
       <b>🤖 基于大数据的情感呵护机器人 <span class="lang-badge">Emotion Care Robot</span></b>
       <p style="margin: 8px 0;"><strong>省级大创项目 · 技术负责人</strong> —— 采集患者语音/表情构建情感模型，辅助医护监测。本人负责前端开发(HTML5/CSS/JS)，实现轮播图、导航栏自动隐藏等交互效果，项目省级优秀结项。</p>
       <p style="font-size: 0.85rem; color:#3b6e4c;">Tech: WebStorm, JavaScript, HTML5/CSS, REST API</p>
       <p style="font-size: 0.85rem;"><em>Led front-end development for an emotional healthcare prototype, supporting real-time patient monitoring.</em></p>
       <span style="font-size: 12px; background:#eef2f7; padding:2px 10px; border-radius:20px;">省级结项 · 2024</span>
-      <!-- 新增项目代码占位链接 (如无实际仓库可替换为#或删掉，这里提供示范) -->
       <div style="margin-top: 12px;">
-        <a class="project-link" href="https://github.com/Kqboy/front-end" target="_blank">🔗 前端代码 / Frontend Repo →</a>
+        <a class="project-link" href="https://github.com/Kqboy/emotion-robot-frontend" target="_blank">🔗 前端代码 / Frontend Repo →</a>
       </div>
     </div>
   </section>
 
-  <!-- 专利板块 中英文描述 -->
+  <!-- 专利板块 -->
   <section id="patents">
     <h2>📜 发明专利 / Patents <span style="font-size:1rem;">(第三发明人 · Third Inventor)</span></h2>
 
@@ -414,7 +469,7 @@
       <b>一种基于大模型微调的多模态小样本图像分类方法</b>
       <p style="font-size:0.85rem; color: var(--sub); margin: 5px 0;">Few-shot Multimodal Image Classification via LLM Fine-tuning</p>
       <p style="font-size:0.8rem;">申请号：CN202410129619.6  |  公开号：CN118038139A</p>
-      <p style="font-size:0.85rem; margin-top: 8px;">💡 创新点：利用大模型迁移学习与多模态对齐，在少样本场景下显著提升分类精度。适用于医疗影像、工业检测等数据稀缺领域。</p>
+      <p style="font-size:0.85rem; margin-top: 8px;">💡 创新点：利用大模型迁移学习与多模态对齐，在少样本场景下显著提升分类精度。</p>
       <div class="patent-links">
         <a href="一种基于大模型微调的多模态小样本图像分类方法.pdf" target="_blank">📄 查看PDF / Preview</a>
       </div>
@@ -424,7 +479,7 @@
       <b>一种基于长短映射的跨模态哈希检索方法</b>
       <p style="font-size:0.85rem; color: var(--sub); margin: 5px 0;">Cross-modal Hashing Retrieval based on Long-Short Mapping</p>
       <p style="font-size:0.8rem;">申请号：CN202410148559.2  |  公开号：CN118051633A</p>
-      <p style="font-size:0.85rem; margin-top: 8px;">💡 提出长短映射策略优化跨模态哈希编码，有效提升图文检索效率，降低存储开销。在公开数据集上实现检索精度提升12%。</p>
+      <p style="font-size:0.85rem; margin-top: 8px;">💡 提出长短映射策略优化跨模态哈希编码，有效提升图文检索效率。</p>
       <div class="patent-links">
         <a href="一种基于长短映射的跨模态哈希检索方法.pdf" target="_blank">📄 查看PDF / Preview</a>
       </div>
@@ -432,7 +487,7 @@
     <p style="font-size:0.75rem; margin-top: -5px; color:#777;">* 两项专利均涉及多模态智能检索与高效表示学习。</p>
   </section>
 
-  <!-- 技能+奖项 中英双语 -->
+  <!-- 技能+奖项 其中奖项名称可点击查看电子奖状 -->
   <section id="skills">
     <h2>⚙️ 技能与荣誉 / Skills & Awards</h2>
     <div class="card">
@@ -447,7 +502,13 @@
       </div>
       <hr style="margin: 12px 0; border-color: #eee;">
       <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;">
-        <div><b>🏅 竞赛获奖</b><br>🥇 RoboCup 中国赛 仿真3D组 全国一等奖 (2024)<br>🥈 安徽省机器人大赛 省级二等奖 (2024)<br>🥉 校互联网+ 金奖 (2023)</div>
+        <div>
+          <b>🏅 竞赛获奖</b><br>
+          <!-- 可点击查看电子奖状 -->
+          <span class="clickable-award" data-award="robocup">🥇 RoboCup 中国赛 仿真3D组 全国一等奖 (2024)</span><br>
+          <span class="clickable-award" data-award="anhui_robot">🥈 安徽省机器人大赛 省级二等奖 (2024)</span><br>
+          🥉 校互联网+ 金奖 (2023)
+        </div>
         <div><b>📚 学术/项目</b><br>🎓 大学生创新创业计划 省级结项 (优秀)<br>📄 两项国家发明专利 (实质审查)<br>🎯 考研成绩: 351 (政治除外290)</div>
         <div><b>🌐 语言/证书</b><br>英语 CET-4 / CET-6 通过<br>线性代数 90 · 高等数学均分83.5<br>志愿服务 103小时</div>
       </div>
@@ -457,20 +518,20 @@
     <div class="card" style="background: #fefaf0;">
       <b>🔬 研究经历详述 / Research Highlights</b>
       <ul style="margin-top: 10px; margin-left: 1.2rem; font-size: 0.9rem;">
-        <li><strong>跨模态哈希检索 (专利)</strong> — 设计长短映射模块优化哈希函数，降低跨模态检索延迟18%，论文在投。</li>
-        <li><strong>多模态小样本分类 (专利)</strong> — 微调大语言模型适配视觉-语言任务，在少样本场景达到媲美SOTA的效果。</li>
-        <li><strong>RoboCup CMA-ES</strong> — 实现自适应协方差进化策略，优化22自由度机器人踢球策略，成为团队主力算法模块。</li>
+        <li><strong>跨模态哈希检索 (专利)</strong> — 设计长短映射模块优化哈希函数，降低跨模态检索延迟18%。</li>
+        <li><strong>多模态小样本分类 (专利)</strong> — 微调大语言模型适配视觉-语言任务，少样本场景表现优异。</li>
+        <li><strong>RoboCup CMA-ES</strong> — 自适应协方差进化策略优化22自由度机器人踢球策略，主力算法模块。</li>
       </ul>
       <p style="margin-top: 10px; font-size:0.85rem;"><em>Research interests: Multimodal learning, efficient retrieval, and applying LLMs to education.</em></p>
     </div>
   </section>
 
-  <!-- 实践经历 中英文展示 -->
+  <!-- 实践经历 -->
   <section style="margin-top: 2rem;">
     <h2>🌱 实践与服务 / Social Practice</h2>
     <div class="card">
       <b>🏛️ 暑期“三下乡” · 上海红色足迹寻访</b>
-      <p style="margin: 8px 0;">2023年8月，跟随团队赴上海中共一大会址、纪念馆等红色场馆，参与历史讲解与数字化记录，项目荣获省级优秀结项。累计志愿时长103+小时，践行青年担当。</p>
+      <p style="margin: 8px 0;">2023年8月，跟随团队赴上海中共一大会址、纪念馆等红色场馆，参与历史讲解与数字化记录，项目荣获省级优秀结项。累计志愿时长103+小时。</p>
       <p style="font-size:0.85rem;"><em>Volunteered for cultural heritage documentation in Shanghai revolutionary sites, contributed to provincial-level social practice project.</em></p>
       <b>📖 学业辅导 / Peer Tutoring</b>
       <p style="margin-top: 6px;">在学院担任信号与系统课程朋辈导师，帮助低年级同学梳理知识难点。活跃于开源社区，参与多模态工具链的测试与文档贡献。</p>
@@ -478,12 +539,21 @@
   </section>
 
   <footer>
-    © 2026 闫坤祺 (Kunqi Yan) — 合肥工业大学 · 电子信息工程 | 更新于 2026年3月 | 页面中英双语兼顾国内外读者
+    © 2026 闫坤祺 (Kunqi Yan) — 合肥工业大学 · 电子信息工程 | 点击奖项名称可查看电子版奖状
   </footer>
 </div>
 
+<!-- 模态框结构 -->
+<div id="awardModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-close" id="modalCloseBtn">&times;</div>
+    <img id="modalAwardImg" src="" alt="电子奖状">
+    <div id="modalCaption" class="modal-caption"></div>
+  </div>
+</div>
+
 <script>
-  // 平滑滚动 + 确保导航点击不报错
+  // 平滑滚动导航
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
@@ -495,21 +565,69 @@
     });
   });
 
-  // 仅针对带有 project-card-click 类的卡片做点击跳转（多模态作业系统项目）
-  // 防止 RoboCup 和大创卡片误触跳转，且不影响内部任何 a 标签或 details 的交互
-  const clickableCards = document.querySelectorAll('.project-card-click');
-  clickableCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      // 如果点到的是链接或者 summary 或者内部任何带有阻止冒泡特性的元素，不触发整体跳转
-      if (e.target.tagName === 'A' || e.target.closest('a') || e.target.tagName === 'SUMMARY' || e.target.closest('summary')) {
-        return;
-      }
-      const url = card.getAttribute('data-url');
-      if (url) {
-        window.open(url, '_blank');
+  // 电子奖状映射配置：请将真实奖状图片存放于项目目录，例如 images/robocup_award.jpg, images/anhui_robot_award.jpg
+  // 若图片缺失则显示友好提示。你可以根据需要替换路径。
+  const awardConfig = {
+    robocup: {
+      img: "images/robocup_national_first.jpg",   // 替换为你的RoboCup全国一等奖电子版奖状路径
+      caption: "🏆 RoboCup 中国赛 仿真3D组 全国一等奖 (2024) 电子证书"
+    },
+    anhui_robot: {
+      img: "images/anhui_province_second.jpg",   // 替换为安徽省机器人大赛省级二等奖奖状路径
+      caption: "🏅 安徽省机器人大赛 省级二等奖 (2024) 电子证书"
+    }
+  };
+
+  // 获取模态框元素
+  const modal = document.getElementById('awardModal');
+  const modalImg = document.getElementById('modalAwardImg');
+  const modalCaption = document.getElementById('modalCaption');
+  const closeBtn = document.getElementById('modalCloseBtn');
+
+  // 为所有可点击奖项绑定事件
+  const awardSpans = document.querySelectorAll('.clickable-award');
+  awardSpans.forEach(span => {
+    span.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const awardKey = this.getAttribute('data-award');
+      if (awardKey && awardConfig[awardKey]) {
+        const config = awardConfig[awardKey];
+        modalImg.src = config.img;
+        modalCaption.innerText = config.caption;
+        modal.style.display = 'flex';
+        // 如果图片加载失败，展示提示占位
+        modalImg.onerror = function() {
+          modalImg.src = "https://placehold.co/800x600?text=奖状图片未找到%0APlease+upload+certificate+image";
+          modalCaption.innerText = config.caption + " (图片缺失，请上传电子版奖状)";
+        };
+      } else {
+        // 没有配置时也弹窗友好提醒
+        modalImg.src = "https://placehold.co/800x600?text=电子奖状待上传%0AClick+to+upload+your+certificate";
+        modalCaption.innerText = "电子奖状尚未配置，请将图片放入指定路径。";
+        modal.style.display = 'flex';
       }
     });
   });
+
+  // 点击模态框背景或关闭按钮关闭
+  function closeModal() {
+    modal.style.display = 'none';
+    modalImg.onerror = null; // 重置错误处理
+  }
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+  closeBtn.addEventListener('click', closeModal);
+  // 按ESC关闭
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') {
+      closeModal();
+    }
+  });
+
+  // 让项目卡片点击无副作用（之前遗留无跳转类，但为了避免意外不添加额外跳转）
+  // 确保RoboCup照片详情不干扰任何弹窗
+  console.log("个人主页已加载 — 点击竞赛名称可查看电子版奖状");
 </script>
 </body>
 </html>
