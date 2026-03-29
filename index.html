@@ -78,6 +78,45 @@
       .hero {grid-template-columns:1fr;}
       .avatar {width:100px;height:100px;}
     }
+  
+    /* 新增：可点击卡片 */
+    .clickable {
+      cursor: pointer;
+    }
+
+    .clickable:hover {
+      border-color: var(--accent);
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    .team-img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .patent-links a {
+      margin-right: 10px;
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .patent-links a:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 
@@ -122,14 +161,17 @@
   <section id="projects">
     <h2>Projects</h2>
 
-    <div class="card">
+    <div class="card clickable" onclick="window.open('https://github.com/Kqboy/your-ocr-llm-project','_blank')">
       <b>Multimodal Homework System</b>
       <p>OCR + LLM 自动批改系统</p>
+      <a class="project-link" href="https://github.com/Kqboy/your-ocr-llm-project" target="_blank">View on GitHub →</a>
     </div>
 
     <div class="card">
       <b>RoboCup Optimization</b>
       <p>CMA-ES 机器人优化</p>
+      <img class="team-img" src="team.jpg" alt="team photo">
+      <a class="project-link" href="https://github.com/Kqboy/robocup-project" target="_blank">View Project →</a>
     </div>
 
   </section>
@@ -137,8 +179,23 @@
   <!-- PATENTS -->
   <section id="patents">
     <h2>Patents</h2>
-    <div class="card">跨模态哈希检索方法（已申请）</div>
-    <div class="card">多模态小样本分类（已申请）</div>
+
+    <div class="card">
+      <b>跨模态哈希检索方法</b>
+      <div class="patent-links">
+        <a href="patent1.pdf" target="_blank">📄 Download</a>
+        <a href="patent1.pdf" target="_blank">🔍 View Online</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <b>多模态小样本分类方法</b>
+      <div class="patent-links">
+        <a href="patent2.pdf" target="_blank">📄 Download</a>
+        <a href="patent2.pdf" target="_blank">🔍 View Online</a>
+      </div>
+    </div>
+
   </section>
 
   <!-- SKILLS -->
