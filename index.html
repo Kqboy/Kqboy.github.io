@@ -203,6 +203,11 @@
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
     }
 
+    /* 可点击卡片样式 */
+    .clickable-card {
+      cursor: pointer;
+    }
+
     .project-link {
       display: inline-block;
       margin-top: 10px;
@@ -222,6 +227,10 @@
       border-radius: 12px;
       margin-top: 12px;
       border: 1px solid var(--border);
+    }
+
+    .patent-links {
+      margin-top: 12px;
     }
 
     .patent-links a {
@@ -455,37 +464,40 @@
       <p style="font-size: 0.85rem; color:#3b6e4c;">Tech: WebStorm, JavaScript, HTML5/CSS, REST API</p>
       <p style="font-size: 0.85rem;"><em>Led front-end development for an emotional healthcare prototype, supporting real-time patient monitoring.</em></p>
       <span style="font-size: 12px; background:#eef2f7; padding:2px 10px; border-radius:20px;">省级结项 · 2024</span>
-      <!-- 注意：此处前端代码链接请替换为您自己真实的仓库地址或项目地址 -->
       <div style="margin-top: 12px;">
         <a class="project-link" href="https://github.com/Kqboy/Web" target="_blank">🔗 前端代码 / Frontend Repo →</a>
       </div>
     </div>
   </section>
 
-  <!-- 专利板块 -->
+  <!-- 专利板块 - 新增可点击跳转功能 -->
   <section id="patents">
     <h2>📜 发明专利 / Patents <span style="font-size:1rem;">(第三发明人 · Third Inventor)</span></h2>
 
-    <div class="card">
+    <!-- 专利1：可点击跳转 GitHub 仓库，PDF链接单独处理不触发跳转 -->
+    <div class="card clickable-card" data-url="https://github.com/Kqboy/Patent-LLM-FewShot" onclick="event.stopPropagation(); if(this.getAttribute('data-url')) window.open(this.getAttribute('data-url'), '_blank')">
       <b>一种基于大模型微调的多模态小样本图像分类方法</b>
       <p style="font-size:0.85rem; color: var(--sub); margin: 5px 0;">Few-shot Multimodal Image Classification via LLM Fine-tuning</p>
       <p style="font-size:0.8rem;">申请号：CN202410129619.6  |  公开号：CN118038139A</p>
       <p style="font-size:0.85rem; margin-top: 8px;">💡 创新点：利用大模型迁移学习与多模态对齐，在少样本场景下显著提升分类精度。</p>
-      <div class="patent-links">
+      <div class="patent-links" onclick="event.stopPropagation()">
         <a href="一种基于大模型微调的多模态小样本图像分类方法.pdf" target="_blank">📄 查看PDF / Preview</a>
+        <a href="#" onclick="event.preventDefault(); window.open(this.parentElement.parentElement.getAttribute('data-url'), '_blank')" style="margin-left: 8px;">🔗 查看专利详细介绍 →</a>
       </div>
     </div>
 
-    <div class="card">
+    <!-- 专利2：可点击跳转 GitHub 仓库，PDF链接单独处理不触发跳转 -->
+    <div class="card clickable-card" data-url="https://github.com/Kqboy/Patent-CrossModal-Hashing" onclick="event.stopPropagation(); if(this.getAttribute('data-url')) window.open(this.getAttribute('data-url'), '_blank')">
       <b>一种基于长短映射的跨模态哈希检索方法</b>
       <p style="font-size:0.85rem; color: var(--sub); margin: 5px 0;">Cross-modal Hashing Retrieval based on Long-Short Mapping</p>
       <p style="font-size:0.8rem;">申请号：CN202410148559.2  |  公开号：CN118051633A</p>
       <p style="font-size:0.85rem; margin-top: 8px;">💡 提出长短映射策略优化跨模态哈希编码，有效提升图文检索效率。</p>
-      <div class="patent-links">
+      <div class="patent-links" onclick="event.stopPropagation()">
         <a href="一种基于长短映射的跨模态哈希检索方法.pdf" target="_blank">📄 查看PDF / Preview</a>
+        <a href="#" onclick="event.preventDefault(); window.open(this.parentElement.parentElement.getAttribute('data-url'), '_blank')" style="margin-left: 8px;">🔗 查看专利详细介绍 →</a>
       </div>
     </div>
-    <p style="font-size:0.75rem; margin-top: -5px; color:#777;">* 两项专利均涉及多模态智能检索与高效表示学习。</p>
+    <p style="font-size:0.75rem; margin-top: -5px; color:#777;">* 两项专利均涉及多模态智能检索与高效表示学习。点击卡片可查看专利详细介绍（GitHub）。</p>
   </section>
 
   <!-- 技能+奖项 其中奖项名称可点击查看电子奖状 -->
@@ -534,12 +546,11 @@
       <b>🏛️ 暑期“三下乡” · 上海红色足迹寻访</b>
       <p style="margin: 8px 0;">2023年8月，跟随团队赴上海中共一大会址、纪念馆等红色场馆，参与历史讲解与数字化记录，项目荣获省级优秀结项。累计志愿时长103+小时。</p>
       <p style="font-size:0.85rem;"><em>Volunteered for cultural heritage documentation in Shanghai revolutionary sites, contributed to provincial-level social practice project.</em></p>
-      <!-- 以下“学业辅导”段落已完全删除 -->
     </div>
   </section>
 
   <footer>
-    © 2026 闫坤祺 (Kunqi Yan) — 合肥工业大学 · 电子信息工程 | 点击奖项名称可查看电子版奖状
+    © 2026 闫坤祺 (Kunqi Yan) — 合肥工业大学 · 电子信息工程 | 点击奖项名称可查看电子版奖状，点击专利卡片可查看详细介绍
   </footer>
 </div>
 
@@ -565,15 +576,14 @@
     });
   });
 
-  // 电子奖状映射配置：请将真实奖状图片存放于项目目录，例如 images/robocup_award.jpg, images/anhui_robot_award.jpg
-  // 若图片缺失则显示友好提示。你可以根据需要替换路径。
+  // 电子奖状映射配置
   const awardConfig = {
     robocup: {
-      img: "robocup_national_first.jpg",   // 替换为你的RoboCup全国一等奖电子版奖状路径
+      img: "robocup_national_first.jpg",
       caption: "🏆 RoboCup 中国赛 仿真3D组 全国一等奖 (2024) 电子证书"
     },
     anhui_robot: {
-      img: "anhui_province_second.jpg",   // 替换为安徽省机器人大赛省级二等奖奖状路径
+      img: "anhui_province_second.jpg",
       caption: "🏅 安徽省机器人大赛 省级二等奖 (2024) 电子证书"
     }
   };
@@ -595,13 +605,11 @@
         modalImg.src = config.img;
         modalCaption.innerText = config.caption;
         modal.style.display = 'flex';
-        // 如果图片加载失败，展示提示占位
         modalImg.onerror = function() {
           modalImg.src = "https://placehold.co/800x600?text=奖状图片未找到%0APlease+upload+certificate+image";
           modalCaption.innerText = config.caption + " (图片缺失，请上传电子版奖状)";
         };
       } else {
-        // 没有配置时也弹窗友好提醒
         modalImg.src = "https://placehold.co/800x600?text=电子奖状待上传%0AClick+to+upload+your+certificate";
         modalCaption.innerText = "电子奖状尚未配置，请将图片放入指定路径。";
         modal.style.display = 'flex';
@@ -612,20 +620,19 @@
   // 点击模态框背景或关闭按钮关闭
   function closeModal() {
     modal.style.display = 'none';
-    modalImg.onerror = null; // 重置错误处理
+    modalImg.onerror = null;
   }
   modal.addEventListener('click', function(e) {
     if (e.target === modal) closeModal();
   });
   closeBtn.addEventListener('click', closeModal);
-  // 按ESC关闭
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && modal.style.display === 'flex') {
       closeModal();
     }
   });
 
-  console.log("个人主页已加载 — 点击竞赛名称可查看电子版奖状，学业辅导部分已移除");
+  console.log("个人主页已加载 — 点击竞赛名称可查看电子版奖状，点击专利卡片可查看详细介绍");
 </script>
 </body>
 </html>
