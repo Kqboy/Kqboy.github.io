@@ -1,2 +1,2 @@
 # Kqboy.github.io
-欢迎大家观看我的主页
+欢迎大家观看我的主页https://kqboy.github.io/
